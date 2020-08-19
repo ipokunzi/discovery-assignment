@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Add Route</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="../css/shards.min.css">
+</head>
+<body>
+	<div class="container my-5">
+	<h3> Add Route</h3>
+		<div class="card">
+			<div class="card-body">
+				<div class="col-md-10">
+					<p class="my-5">
+						<a href="/api/v1/routes/view-routes" class="btn btn-primary">
+							<i class="fa fa-route"> Routes</i>
+						</a>
+					</p>
+					<form th:action="@{/api/v1/routes/add}" th:object="${route}" method="post">
+						<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+				      		<p>Invalid form</p>
+				      	</div>
+						<div class="row"> 
+							<div class="form-group col-md-8">
+								<label for="routeid" class="col-form-label">Route ID</label> 
+									<input type="text" class="form-control" id="routeid" name="routeid" placeholder="Enter">
+									<span class="help-block" th:if="${#fields.hasErrors('routeid')}">
+										<p th:errors="*{routeid}" class="text-danger">Route error</p>
+					                </span>
+							</div>
+							<div class="form-group col-md-8">
+								<label for="source" class="col-form-label">Source</label> 
+									<select class="form-control" id="source" name="source">
+								    	<option th:value="''" th:text="Select"></option>
+								    	<option th:each="i : ${planets}" th:value="${i.id}" th:text="${i.node} + ' => ' + ${i.name}"></option>																  
+									</select> 
+							</div>
+							<div class="form-group col-md-8">
+								<label for="destination" class="col-form-label">Destination</label> 
+									<select class="form-control" id="destination" name="destination">
+								    	<option th:value="''" th:text="Select"></option>
+								    	<option th:each="i : ${planets}" th:value="${i.id}" th:text="${i.node} + ' => ' + ${i.name}"></option>																  
+									</select> 
+							</div>
+							<div class="form-group col-md-8">
+								<label for="distance" class="col-form-label">Distance</label> 
+									<input type="text" class="form-control" id="distance" name="distance" placeholder="Enter">
+									<span class="help-block" th:if="${#fields.hasErrors('distance')}">
+										<p th:errors="*{distance}" class="text-danger">Distance error</p>
+					                </span> 
+							</div>
+							<div class="form-group col-md-8">
+								<label for="traffic" class="col-form-label">Traffic</label> 
+									<input type="text" class="form-control" id="traffic" name="traffic" placeholder="Enter">
+									<span class="help-block" th:if="${#fields.hasErrors('traffic')}">
+										<p th:errors="*{traffic}" class="text-danger">Distance error</p>
+					                </span>
+							</div>
+							<div class="col-md-6">
+								<input type="submit" class="btn btn-primary" value="Add Route">
+							</div>
+
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Add Planet</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="../css/shards.min.css">
+</head>
+<body>
+	<div class="container my-5">
+	<h3> Add Planet</h3>
+		<div class="card">
+			<div class="card-body">
+				<div class="col-md-10">
+					<p class="my-5">
+						<a href="/api/v1/galaxy/" class="btn btn-primary">
+							<i class="fa fa-globe">Home</i>
+						</a>
+					</p>
+					<h1>Shortest Path</h1>
+				    <p th:text="'From: ' + ${path.source}" />
+				    <p th:text="'To: ' + ${path.destination}" />
+				    <p th:text="${path.traffic} ? 'Traffic : Yes' : 'Traffic : No'" />
+				    <table class="table table-striped table-responsive-md">
+						<thead>
+							<tr th:if="${shortestpath != null}">
+					            <th> Node </th>
+					            <th> Name </th>
+					        </tr>
+					    </thead>
+				    	<tbody>
+							<tr th:if="${shortestpath == null}">
+					            <td colspan="2"> No Path Available </td>
+					        </tr>
+					        <tr th:each="p : ${shortestpath}">
+					            <td><span th:text="${p.node}"> Node </span></td>
+					            <td><span th:text="${p.name}"> Name </span></td>
+					        </tr>
+					    </tbody>
+				    </table>
+    				<p class="my-5">
+						<a href="/api/v1/galaxy/shortestpath" class="btn btn-primary">
+							Select Another Path
+						</a>
+					</p>
+    			</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Interstellar Transport System</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+<!-- <link rel="stylesheet" href="../css/shards.min.css"> -->
+</head>
+<body>
+
+	<div class="container my-2">
+		<div class="card">
+			<div class="card-body">
+				<div th:switch="${routes}" class="container my-5">
+					<div class="col-md-10">
+						<p class="my-5">
+							<a href="/api/v1/routes/new" class="btn btn-primary">
+								<i class="fas fa-route">+Add Route</i>
+							</a>
+							<a href="/api/v1/routes/clean" class="btn btn-primary">
+								<i class="fas fa-route"> Delete All Routes</i>
+							</a>
+						</p>
+						<h2 th:case="null">No Routes!</h2>
+						<div th:case="*">
+							<p th:text="${#lists.size(routes)}+' Routes'"></p>
+							<h2>Routes</h2>
+							<table class="table table-striped table-responsive-md">
+								<thead>
+									<tr>
+										<th>ID</th>
+										<th>ROUTE ID</th>
+										<th>SOURCE</th>
+										<th>DESTINATION</th>
+										<th>DISTANCE</th>
+										<th>TRAFFIC</th>
+										<th>Edit</th>
+										<th>Delete</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="route : ${routes}">
+										<td th:text="${route.id}"></td>
+										<td th:text="${route.routeid}"></td>
+										<td th:text="${route.source.node}"></td>
+										<td th:text="${route.destination.node}"></td>
+										<td th:text="${route.distance}"></td>
+										<td th:text="${route.traffic}"></td>
+										<td>
+											<a th:href="@{/api/v1/routes/edit/{id}(id=${route.id})}" class="btn btn-primary"><i class="fa fa-edit"></i></a>
+										</td>
+										<td>
+											<a th:href="@{/api/v1/routes/delete/{id}(id=${route.id})}" class="btn btn-primary"><i class="fas fa-trash-alt"></i></a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</body>
+</html>
