@@ -106,7 +106,7 @@ class InterstellarTransportSystemApplicationTests {
          Planet planet = restTemplate.getForObject(getRootUrl() + "/api/v1/planets/" + id, Planet.class);
          Assert.assertNotNull(planet);
 
-         restTemplate.delete(getRootUrl() + "/planets/" + id);
+         restTemplate.delete(getRootUrl() + "/api/v1/planets/" + id);
     
          try {
               planet = restTemplate.getForObject(getRootUrl() + "/api/v1/planets/" + id, Planet.class);
@@ -184,7 +184,7 @@ class InterstellarTransportSystemApplicationTests {
               Route route = restTemplate.getForObject(getRootUrl() + "/api/v1/routes/" + id, Route.class);
               Assert.assertNotNull(route);
 
-              restTemplate.delete(getRootUrl() + "/routes/" + id);
+              restTemplate.delete(getRootUrl() + "/api/v1/routes/" + id);
          
               try {
                    route = restTemplate.getForObject(getRootUrl() + "/api/v1/routes/" + id, Route.class);
