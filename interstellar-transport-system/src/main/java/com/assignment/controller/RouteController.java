@@ -84,11 +84,13 @@ public class RouteController {
 	
 	@PostMapping("/add")
 	public String addRoute(@ModelAttribute Route route, BindingResult result, Model model) {
-		if (result.hasErrors()) {
-	    	model.addAttribute(route);
-			model.addAttribute("planets", planetService.getAllPlanets());
-			return "add-route";
-		}
+		route.setSource(planetService.getPlanetByNode((String) result.getFieldValue("source")));
+		route.setDestination(planetService.getPlanetByNode((String) result.getFieldValue("destination")));
+//		if (result.hasErrors()) {
+//	    	model.addAttribute(route);
+//			model.addAttribute("planets", planetService.getAllPlanets());
+//			return "add-route";
+//		}
 		route = routeService.createRoute(route);
 		model.addAttribute("routes", routeService.getAllRoutes());
 		return "view-routes";
@@ -105,11 +107,12 @@ public class RouteController {
 	
 	@PostMapping("/update/{id}")
 	public String updateRoute(@PathVariable("id") long id, @Valid Route route, BindingResult result, Model model) throws RecordNotFoundException {
-		
-		if (result.hasErrors()) {
-			model.addAttribute("errors", result.getAllErrors());
-            return "update-route";
-        }
+		route.setSource(planetService.getPlanetByNode((String) result.getFieldValue("source")));
+		route.setDestination(planetService.getPlanetByNode((String) result.getFieldValue("destination")));
+//		if (result.hasErrors()) {
+//			model.addAttribute("errors", result.getAllErrors());
+//            return "update-route";
+//        }
 		
 		route = routeService.updateRoute(id, route);
 		model.addAttribute("routes", routeService.getAllRoutes());
