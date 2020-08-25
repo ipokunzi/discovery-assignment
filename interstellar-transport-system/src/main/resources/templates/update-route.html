@@ -36,14 +36,14 @@
 							<div class="form-group col-md-8">
 								<label for="source" class="col-form-label">Source</label> 
 									<select class="form-control" id="source" name="source" >
-								    	<option th:each="i : ${planets}" th:value="${i}" th:text="${i.node} + ' => ' + ${i.name} + ' => ' + ${i}"  th:selected="${i.id} == ${route.source.id}"></option>																  
+								    	<option th:each="i : ${planets}" th:value="${i.node}" th:text="${i.node} + ' => ' + ${i.name}"  th:selected="${i.id} == ${route.source.id}"></option>																  
 									</select>
 									<span th:if="${#fields.hasErrors('source')}" th:errors="*{source}" class="text-danger"></span>
 							</div>
 							<div class="form-group col-md-8">
 								<label for="destination" class="col-form-label">Destination</label>
 									<select class="form-control" id="destination" name="destination"> 
-								    	<option th:each="i : ${planets}" th:value="${i}" th:text="${i.node} + ' => ' + ${i.name}" th:selected="${i.id} == ${route.destination.id}"></option>																  
+								    	<option th:each="i : ${planets}" th:value="${i.node}" th:text="${i.node} + ' => ' + ${i.name}" th:selected="${i.id} == ${route.destination.id}"></option>																  
 									</select>
 									<span th:if="${#fields.hasErrors('destination')}" th:errors="*{destination}" class="text-danger"></span>
 							</div>
